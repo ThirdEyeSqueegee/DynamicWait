@@ -29,7 +29,7 @@ namespace Events
                                 if (btn_event->IsHeld()) {
                                     if (Utility::waiting) {
                                         if (Settings::ramp_up_multiplier) {
-                                            Utility::multiplier_accumulator += 0.005;
+                                            Utility::multiplier_accumulator += 0.01;
                                             Utility::multiplier_accumulator = std::clamp(Utility::multiplier_accumulator, Settings::wait_multiplier, Settings::clamp_multiplier);
                                             timer->SetGlobalTimeMultiplier(Utility::multiplier_accumulator, true);
                                         }

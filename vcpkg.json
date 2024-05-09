@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "dynamic-wait",
-  "version-semver": "1.0.1",
+  "version-semver": "1.0.2",
   "builtin-baseline": "3dcd8bb40bc2bbedf206e0bf0dc72c26e2aa2ddd",
   "dependencies": ["fmt", "spdlog", "rapidcsv", "simpleini", "directxtk"],
   "license": "GPL-3.0-or-later"

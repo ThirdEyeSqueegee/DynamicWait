@@ -8,7 +8,7 @@ void Settings::LoadSettings() noexcept
     CSimpleIniA ini;
 
     ini.SetUnicode();
-    ini.LoadFile(R"(.\Data\SKSE\Plugins\DynamicWaitSKSE.ini)");
+    ini.LoadFile(R"(.\Data\SKSE\Plugins\DynamicWait.ini)");
 
     debug_logging = ini.GetBoolValue("Log", "Debug");
 
