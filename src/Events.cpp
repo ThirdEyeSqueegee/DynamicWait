@@ -4,6 +4,8 @@
 
 namespace Events
 {
+    using enum RE::INPUT_DEVICE;
+
     RE::BSEventNotifyControl InputEventHandler::ProcessEvent(RE::InputEvent* const* a_event, RE::BSTEventSource<RE::InputEvent*>* a_eventSource) noexcept
     {
         if (!a_event) {
@@ -14,8 +16,15 @@ namespace Events
             if (const auto control_map{ RE::ControlMap::GetSingleton() }; control_map->IsMovementControlsEnabled()) {
                 for (auto e{ *a_event }; e != nullptr; e = e->next) {
                     if (const auto btn_event{ e->AsButtonEvent() }) {
-                        const auto keycode{ btn_event->GetIDCode() };
-                        if (btn_event->GetDevice() == RE::INPUT_DEVICE::kKeyboard && keycode == Settings::wait_hotkey) {
+                        auto       keycode{ btn_event->GetIDCode() };
+                        const auto device{ btn_event->GetDevice() };
+                        if (device != kKeyboard && device != kGamepad) {
+                            return RE::BSEventNotifyControl::kContinue;
+                        }
+                        if (device == kGamepad) {
+                            keycode = SKSE::InputMap::GamepadMaskToKeycode(keycode);
+                        }
+                        if (keycode == Settings::wait_hotkey) {
                             if (const auto timer{ RE::BSTimer::GetSingleton() }) {
                                 if (btn_event->IsHeld()) {
                                     if (Utility::waiting) {
